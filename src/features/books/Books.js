@@ -1,20 +1,29 @@
-import React from "react";
-import { useSelector } from "react-redux";
 
-function Books() {
-  const books = useSelector((state) => state.books);
+export const addBook = (book) => {
+  return {
+    type: "books/add",
+    payload: book,
+  };
+};
 
-  return (
-    <div>
-      <ul>
-        {books.map((book) => (
-          <li key={book.id}>
-            {book.title} by {book.authorName}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+export const removeBook = (id) => {
+  return {
+    type: "books/remove",
+    payload: id,
+  };
+};
+
+const initialState = [];
+
+export default function booksReducer(state = initialState, action) {
+  switch (action.type) {
+    case "books/add":
+      return [...state, action.payload];
+
+    case "books/remove":
+      return state.filter((book) => book.id !== action.payload);
+
+    default:
+      return state;
+  }
 }
-
-export default Books;

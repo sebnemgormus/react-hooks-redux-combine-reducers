@@ -20,7 +20,7 @@ function BookInput() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    // use the uuid library to generate a unique ID for our books
+    
     const book = { ...formData, id: uuid() };
 
     dispatch(addBook(book));
